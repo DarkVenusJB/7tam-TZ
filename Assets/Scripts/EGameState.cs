@@ -2,6 +2,8 @@
 {
     public enum EGameState
     {
-        
+        Played,
+        GameOver,
+        GameWon,
     }
 }

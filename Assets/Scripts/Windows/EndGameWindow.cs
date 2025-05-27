@@ -1,7 +1,12 @@
-﻿namespace Scripts.Windows
+﻿using UnityEngine;
+
+namespace Scripts.Windows
 {
-    public class EndGameWindow
+    public class EndGameWindow : MonoBehaviour, IEndGameWindow
     {
-        
+        public void Init()
+        {
+            
+        }
     }
 }

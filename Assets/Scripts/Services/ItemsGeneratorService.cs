@@ -1,6 +1,6 @@
 ﻿namespace Scripts.Services
 {
-    public class ItemsGeneratorService
+    public class ItemsGeneratorService : IItemsGeneratorService
     {
         
     }
