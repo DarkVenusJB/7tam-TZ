@@ -22,7 +22,7 @@ namespace Installers
         private void InstallServices()
         {
             Container.BindInterfacesAndSelfTo<ItemsGeneratorService>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<IGameStateService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameStateService>().AsSingle().NonLazy();
         }
     }
 }

@@ -1,4 +1,5 @@
-using System;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Scripts.Services;
 using Scripts.Windows;
 using UnityEngine;
@@ -9,9 +10,12 @@ namespace Scripts
 	public class GameSceneSetup : MonoBehaviour
 	{
 		[SerializeField] private StartGameWindow _startGameWindow;
+		[SerializeField] private CanvasGroup _loadingWindow;
 		
 		private IItemsGeneratorService _itemsGeneratorService;
 		private IGameStateService _gameStateService;
+		
+		private const float LOADING_WINDOW_DURATION = 0.5f;
 
 		[Inject]
 		public void Inject(
@@ -22,9 +26,27 @@ namespace Scripts
 			_gameStateService = gameStateService;
 		}
 		
-		private void Awake()
+		private void Start()
 		{
-			throw new NotImplementedException();
+			DifferedStart();
+		}
+
+		private async void DifferedStart()
+		{
+			_loadingWindow.alpha = 1;
+			
+			await UniTask.WaitWhile(() => _itemsGeneratorService == null);
+			await UniTask.WaitWhile(() => _gameStateService == null);
+
+			await UniTask.Delay(1500);
+			
+			_loadingWindow.DOFade(0, LOADING_WINDOW_DURATION)
+				.OnComplete(() =>
+				{
+					_loadingWindow.gameObject.SetActive(false);
+				});
+			
+			_startGameWindow.Init();
 		}
 	}
 }
