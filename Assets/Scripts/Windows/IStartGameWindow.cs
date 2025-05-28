@@ -1,7 +1,9 @@
-﻿namespace Scripts.Windows
+﻿using System;
+
+namespace Scripts.Windows
 {
     public interface IStartGameWindow
     {
-        void Init();
+        void Init(Action onGameStarted);
     }
 }

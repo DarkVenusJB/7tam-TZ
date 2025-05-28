@@ -1,6 +1,9 @@
 using DG.Tweening;
 using Providers;
+using Scripts;
+using Scripts.Data;
 using Scripts.Services;
+using Scripts.View;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +11,12 @@ namespace Installers
 {
     public class GameSceneInstaller : MonoInstaller
     {
+        [SerializeField] private GameItemView _circlePrefab;
+        [SerializeField] private GameItemView _squarePrefab;
+        [SerializeField] private GameItemView _trianglePrefab;
+        
+        [SerializeField] private GameItemViewData _visualData;
+        
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -19,6 +28,12 @@ namespace Installers
         {
             InstallServices();
             InitProviders();
+            
+            Container.Bind<IGameItemFactory>().To<GameItemFactory>().AsSingle()
+                .WithArguments(_circlePrefab, _squarePrefab, _trianglePrefab);
+            
+            Container.Bind<IGameItemSpawner>().To<GameItemSpawner>()
+                .FromComponentsInHierarchy().AsSingle();
         }
 
         private void InstallServices()
@@ -29,7 +44,7 @@ namespace Installers
 
         private void InitProviders()
         {
-            Container.BindInterfacesAndSelfTo<GameItemVisualProvider>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameItemVisualProvider>().AsSingle().WithArguments(_visualData);
         }
     }
 }

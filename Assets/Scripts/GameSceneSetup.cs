@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Scripts.Data;
@@ -16,18 +17,23 @@ namespace Scripts
 		[SerializeField] private StartGameWindow _startGameWindow;
 		[SerializeField] private CanvasGroup _loadingWindow;
 		
+		private List<GameItemData> _generatedElements = new();
+		
 		private IItemsGeneratorService _itemsGeneratorService;
 		private IGameStateService _gameStateService;
-		
+		private IGameItemSpawner _itemSpawner;
+
 		private const float LOADING_WINDOW_DURATION = 0.5f;
 
 		[Inject]
 		public void Inject(
 			IItemsGeneratorService  itemsGeneratorService, 
-			IGameStateService gameStateService)
+			IGameStateService gameStateService,
+			IGameItemSpawner  itemSpawner)
 		{
 			_itemsGeneratorService = itemsGeneratorService;
 			_gameStateService = gameStateService;
+			_itemSpawner = itemSpawner;
 		}
 		
 		private void Start()
@@ -41,7 +47,10 @@ namespace Scripts
 			
 			await UniTask.WaitWhile(() => _itemsGeneratorService == null);
 			await UniTask.WaitWhile(() => _gameStateService == null);
+			await UniTask.WaitWhile(() => _itemSpawner == null);
 
+			_generatedElements =_itemsGeneratorService.GenerateItems(_generatorData);
+			
 			await UniTask.WaitUntil(() => _itemsGeneratorService.IsAllItemsReady);
 			
 			await UniTask.Delay(1500);
@@ -52,7 +61,17 @@ namespace Scripts
 					_loadingWindow.gameObject.SetActive(false);
 				});
 			
-			_startGameWindow.Init();
+			_startGameWindow.Init(() => StartSpawnElementsWithDelay().Forget());
+		}
+
+		private async UniTaskVoid StartSpawnElementsWithDelay()
+		{
+			foreach (var element in _generatedElements)
+			{
+				_itemSpawner.Spawn(element, Vector3.zero);
+				
+				await UniTask.Delay(400);
+			}
 		}
 	}
 }

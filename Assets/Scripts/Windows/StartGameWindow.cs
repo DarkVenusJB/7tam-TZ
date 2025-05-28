@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scripts.Windows
@@ -7,14 +8,16 @@ namespace Scripts.Windows
     {
         [SerializeField] private Button _startGameButton;
         
-        public void Init()
+        public void Init( Action onGameStarted)
         {
             if(! gameObject.activeSelf)
                 gameObject.SetActive(true);
             
             _startGameButton.onClick.AddListener((() =>
             {
+                gameObject.SetActive(false);
                 
+                onGameStarted?.Invoke();
             }));
         }
     }

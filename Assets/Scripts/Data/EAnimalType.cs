@@ -3,7 +3,7 @@ namespace Scripts.Data
     public enum EAnimalType
     {
         Pig,
-        Cat,
+        Rabbit,
         Dog,
         Beer
     }

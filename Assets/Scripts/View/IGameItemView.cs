@@ -1,7 +1,9 @@
+using Scripts.Data;
+
 namespace Scripts.View
 {
     public interface IGameItemView
     {
-        void Init();
+        void Init(GameItemData data);
     }
 }
