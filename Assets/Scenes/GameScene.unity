@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4c1677ee5209041ae1bc67f6654351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generatorData: {fileID: 0}
+  _generatorData: {fileID: 11400000, guid: 6489c69b6e234ff44bce7045e43da91f, type: 2}
   _startGameWindow: {fileID: 4501925287246862245}
   _loadingWindow: {fileID: 644209242}
 --- !u!4 &356103944
