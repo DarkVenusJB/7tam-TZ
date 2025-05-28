@@ -9,6 +9,9 @@ namespace Scripts.Services
 {
     public class ItemsGeneratorService : IItemsGeneratorService
     {
+        private List<EFigureType> _figureTypes = new();
+        private List<EAnimalType> _animalTypes = new();
+        private List<EColorType> _colorTypes = new();
         private bool _isAllItemsReady;
         
         private readonly Random _random = new();
@@ -29,16 +32,16 @@ namespace Scripts.Services
 
             var result = new List<GameItemData>(totalCount);
 
-            var figures = Enum.GetValues(typeof(EFigureType)).Cast<EFigureType>().ToList();
-            var animals = Enum.GetValues(typeof(EAnimalType)).Cast<EAnimalType>().ToList();
-            var colors = Enum.GetValues(typeof(EColorType)).Cast<EColorType>().ToList();
+            _figureTypes = Enum.GetValues(typeof(EFigureType)).Cast<EFigureType>().ToList();
+            _animalTypes = Enum.GetValues(typeof(EAnimalType)).Cast<EAnimalType>().ToList();
+            _colorTypes = Enum.GetValues(typeof(EColorType)).Cast<EColorType>().ToList();
 
             while (result.Count < totalCount)
             {
-                var figure = figures[_random.Next(figures.Count)];
-                var animal = animals[_random.Next(animals.Count)];
-                var color = colors[_random.Next(colors.Count)];
-                var countToAdd = Math.Min(3 * _random.Next(1, 4), totalCount - result.Count); // 3, 6, 9
+                var figure = _figureTypes[_random.Next(_figureTypes.Count)];
+                var animal = _animalTypes[_random.Next(_animalTypes.Count)];
+                var color = _colorTypes[_random.Next(_colorTypes.Count)];
+                var countToAdd = Math.Min(3 * _random.Next(1, 4), totalCount - result.Count);
 
                 for (int i = 0; i < countToAdd; i++)
                 {
