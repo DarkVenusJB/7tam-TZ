@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Scripts.Data;
 using Scripts.Services;
 using Scripts.Windows;
 using UnityEngine;
@@ -9,6 +10,9 @@ namespace Scripts
 {
 	public class GameSceneSetup : MonoBehaviour
 	{
+		[Header("GeneratorData")]
+		[SerializeField] private GeneratorData _generatorData;
+		[Header("Game Scene Setup")]
 		[SerializeField] private StartGameWindow _startGameWindow;
 		[SerializeField] private CanvasGroup _loadingWindow;
 		
@@ -38,6 +42,8 @@ namespace Scripts
 			await UniTask.WaitWhile(() => _itemsGeneratorService == null);
 			await UniTask.WaitWhile(() => _gameStateService == null);
 
+			await UniTask.WaitUntil(() => _itemsGeneratorService.IsAllItemsReady);
+			
 			await UniTask.Delay(1500);
 			
 			_loadingWindow.DOFade(0, LOADING_WINDOW_DURATION)

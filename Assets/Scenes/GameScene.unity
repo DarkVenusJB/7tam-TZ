@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4c1677ee5209041ae1bc67f6654351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _generatorData: {fileID: 0}
   _startGameWindow: {fileID: 4501925287246862245}
   _loadingWindow: {fileID: 644209242}
 --- !u!4 &356103944
@@ -757,7 +758,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644209238}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1910,6 +1911,10 @@ PrefabInstance:
     - target: {fileID: 5180753626104034242, guid: 389af1d4a214db34d8a2c0ea4e1de4bb, type: 3}
       propertyPath: m_Name
       value: EndGameWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180753626104034242, guid: 389af1d4a214db34d8a2c0ea4e1de4bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
