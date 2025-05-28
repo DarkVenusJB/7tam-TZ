@@ -5,5 +5,6 @@
         Square,
         Circle,
         Triangle,
+        Capsule,
     }
 }

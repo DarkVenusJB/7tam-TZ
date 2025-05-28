@@ -13,6 +13,7 @@ namespace Scripts.Services
         private readonly GameItemView _circlePrefab;
         private readonly GameItemView _squarePrefab;
         private readonly GameItemView _trianglePrefab;
+        private readonly GameItemView _capsulePrefab;
 
         private readonly GameItemVisualProvider _visualProvider;
 
@@ -20,12 +21,14 @@ namespace Scripts.Services
             DiContainer container,
             GameItemView circlePrefab,
             GameItemView squarePrefab,
-            GameItemView trianglePrefab)
+            GameItemView trianglePrefab,
+            GameItemView capsulePrefab)
         {
             _container = container;
             _circlePrefab = circlePrefab;
             _squarePrefab = squarePrefab;
             _trianglePrefab = trianglePrefab;
+            _capsulePrefab = capsulePrefab;
         }
 
         public GameItemView Create(GameItemData data)
@@ -35,13 +38,11 @@ namespace Scripts.Services
                 EFigureType.Circle => _circlePrefab,
                 EFigureType.Square => _squarePrefab,
                 EFigureType.Triangle => _trianglePrefab,
+                EFigureType.Capsule => _capsulePrefab,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
             var view = _container.InstantiatePrefabForComponent<GameItemView>(prefab);
-
-            //var sprite = _visualProvider.GetFigureSprite(data.FigureType);
-            //var color = _visualProvider.GetColor(data.ColorType);
 
             view.Init(data);
 

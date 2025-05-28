@@ -14,6 +14,7 @@ namespace Installers
         [SerializeField] private GameItemView _circlePrefab;
         [SerializeField] private GameItemView _squarePrefab;
         [SerializeField] private GameItemView _trianglePrefab;
+        [SerializeField] private GameItemView _capsulePrefab;
         
         [SerializeField] private GameItemViewData _visualData;
         
@@ -30,7 +31,7 @@ namespace Installers
             InitProviders();
             
             Container.Bind<IGameItemFactory>().To<GameItemFactory>().AsSingle()
-                .WithArguments(_circlePrefab, _squarePrefab, _trianglePrefab);
+                .WithArguments(_circlePrefab, _squarePrefab, _trianglePrefab, _capsulePrefab);
             
             Container.Bind<IGameItemSpawner>().To<GameItemSpawner>()
                 .FromComponentsInHierarchy().AsSingle();
