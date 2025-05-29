@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Scripts.Windows
 {
-    public class StartGameWindow  : MonoBehaviour, IStartGameWindow
+    public class StartGameWindow  : MonoBehaviour
     {
         [SerializeField] private Button _startGameButton;
         

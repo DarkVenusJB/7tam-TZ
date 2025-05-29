@@ -197,6 +197,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &226447957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5180753626104034242, guid: 389af1d4a214db34d8a2c0ea4e1de4bb, type: 3}
+  m_PrefabInstance: {fileID: 8004079854021634482}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &295222435
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +321,7 @@ MonoBehaviour:
   _generatorData: {fileID: 11400000, guid: 6489c69b6e234ff44bce7045e43da91f, type: 2}
   _spawnZoneCollider: {fileID: 1075233063}
   _startGameWindow: {fileID: 4501925287246862245}
+  _endGameWindow: {fileID: 8004079854021634486}
   _loadingWindow: {fileID: 644209242}
 --- !u!4 &356103944
 Transform:
@@ -1634,13 +1640,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5180753626104034242, guid: 389af1d4a214db34d8a2c0ea4e1de4bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8004079854021634486}
   m_SourcePrefab: {fileID: 100100000, guid: 389af1d4a214db34d8a2c0ea4e1de4bb, type: 3}
 --- !u!224 &8004079854021634483 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3333857905099398682, guid: 389af1d4a214db34d8a2c0ea4e1de4bb, type: 3}
   m_PrefabInstance: {fileID: 8004079854021634482}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8004079854021634486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226447957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73576eb9581944ecb07c15add2758a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

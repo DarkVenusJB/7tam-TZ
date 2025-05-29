@@ -1,5 +1,6 @@
 ﻿using Scripts.Data;
 using Scripts.Services;
+using Scripts.View;
 using UnityEngine;
 using Zenject;
 
@@ -9,10 +10,12 @@ namespace Scripts
     {
         [Inject] private IGameItemFactory _factory;
 
-        public void Spawn(GameItemData data, Vector3 position)
+        public GameItemView Spawn(GameItemData data, Vector3 position)
         {
             var view = _factory.Create(data);
             view.transform.position = position;
+            
+            return view;
         }
     }
 }

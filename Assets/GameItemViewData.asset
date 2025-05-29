@@ -19,21 +19,25 @@ MonoBehaviour:
     Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   - Figure: 2
     Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  - Figure: 3
+    Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
   _animalVariant:
   - Animal: 0
-    Sprite: {fileID: 0}
+    Sprite: {fileID: -267717874, guid: 8e8f770274a58844699fb87730f368cd, type: 3}
   - Animal: 1
-    Sprite: {fileID: 0}
+    Sprite: {fileID: -1489286720, guid: 8e8f770274a58844699fb87730f368cd, type: 3}
   - Animal: 2
-    Sprite: {fileID: 0}
+    Sprite: {fileID: -1570479748, guid: 8e8f770274a58844699fb87730f368cd, type: 3}
   - Animal: 3
-    Sprite: {fileID: 0}
+    Sprite: {fileID: -844873344, guid: 8e8f770274a58844699fb87730f368cd, type: 3}
   _colorVariant:
   - ColorName: 0
-    Color: {r: 0.7169812, g: 0.29423285, b: 0.29423285, a: 0}
+    Color: {r: 0.7169812, g: 0.29423285, b: 0.29423285, a: 1}
   - ColorName: 1
-    Color: {r: 0.2793699, g: 0.733779, b: 0.8113208, a: 0}
+    Color: {r: 0.2793699, g: 0.733779, b: 0.8113208, a: 1}
   - ColorName: 2
-    Color: {r: 0.5778265, g: 0.8490566, b: 0.18823424, a: 0}
+    Color: {r: 0.5778265, g: 0.8490566, b: 0.18823424, a: 1}
   - ColorName: 3
-    Color: {r: 0.8490566, g: 0.7968872, b: 0.20425417, a: 0}
+    Color: {r: 0.8490566, g: 0.7968872, b: 0.20425417, a: 1}
+  - ColorName: 4
+    Color: {r: 0.54804784, g: 0.18422927, b: 0.5660378, a: 1}

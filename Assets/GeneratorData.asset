@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9d18e784cb4f65b0ccee7b40825252, type: 3}
   m_Name: GeneratorData
   m_EditorClassIdentifier: 
-  _minMaxItemsCount: {x: 21, y: 25}
+  _minMaxItemsCount: {x: 47, y: 55}
   _minMaxElementsWithMechanics: {x: 1, y: 2}

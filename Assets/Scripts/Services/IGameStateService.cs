@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Scripts.View;
 
 namespace Scripts.Services
@@ -7,7 +8,10 @@ namespace Scripts.Services
     {
         EGameState GameState { get; }
         List<GameItemView> GameItems { get; }
-        void GameStarted();
-        void AddNewElement();
+        
+        event Action OnGameCompleted;
+        public event Action OnGameOver;
+        void GameStarted(List<GameItemView> gameItems);
+        void AddNewElement(GameItemView gameItemView);
     }
 }

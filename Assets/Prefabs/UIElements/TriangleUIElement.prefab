@@ -209,6 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09831d8072e64187a92deb4a3d9b4059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _figureImage: {fileID: 7722868769370401154}
   _animalImage: {fileID: 5493729403714656563}
-  _figureColor: {r: 0, g: 0, b: 0, a: 0}
+  _figureImage: {fileID: 7722868769370401154}
+  _scaledObject: {fileID: 1201459108530814278}

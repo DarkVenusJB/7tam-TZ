@@ -18,6 +18,7 @@ namespace Scripts
 		[Header("Game Scene Setup")]
 		[SerializeField] private BoxCollider2D _spawnZoneCollider;
 		[SerializeField] private StartGameWindow _startGameWindow;
+		[SerializeField] private EndGameWindow _endGameWindow;
 		[SerializeField] private CanvasGroup _loadingWindow;
 		
 		private List<GameItemData> _generatedElements = new();
@@ -43,6 +44,18 @@ namespace Scripts
 		private void Start()
 		{
 			DifferedStart();
+		}
+
+		private void OnEnable()
+		{
+			_gameStateService.OnGameCompleted += OnGameCompleted;
+			_gameStateService.OnGameOver += OnGameOver;
+		}
+
+		private void OnDisable()
+		{
+			_gameStateService.OnGameCompleted -= OnGameCompleted;
+			_gameStateService.OnGameOver -= OnGameOver;
 		}
 
 		private async void DifferedStart()
@@ -72,10 +85,22 @@ namespace Scripts
 		{
 			foreach (var element in _generatedElements)
 			{
-				_itemSpawner.Spawn(element, GetRandomPointInside());
+				var item =  _itemSpawner.Spawn(element, GetRandomPointInside());
+				
+				_gameStateService.GameItems.Add(item);
 				
 				await UniTask.Delay(TimeSpan.FromSeconds(ELEMENT__SPAWN_DELAY));
 			}
+		}
+
+		private void OnGameCompleted()
+		{
+			_endGameWindow.Show(true);
+		}
+
+		private void OnGameOver()
+		{
+			_endGameWindow.Show(false);
 		}
 		
 		private Vector3 GetRandomPointInside()
