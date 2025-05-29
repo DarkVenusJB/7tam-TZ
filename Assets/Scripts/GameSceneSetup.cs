@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -6,6 +7,7 @@ using Scripts.Services;
 using Scripts.Windows;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Scripts
 {
@@ -14,6 +16,7 @@ namespace Scripts
 		[Header("GeneratorData")]
 		[SerializeField] private GeneratorData _generatorData;
 		[Header("Game Scene Setup")]
+		[SerializeField] private BoxCollider2D _spawnZoneCollider;
 		[SerializeField] private StartGameWindow _startGameWindow;
 		[SerializeField] private CanvasGroup _loadingWindow;
 		
@@ -24,6 +27,7 @@ namespace Scripts
 		private IGameItemSpawner _itemSpawner;
 
 		private const float LOADING_WINDOW_DURATION = 0.5f;
+		private const float ELEMENT__SPAWN_DELAY = 0.2f;
 
 		[Inject]
 		public void Inject(
@@ -53,7 +57,7 @@ namespace Scripts
 			
 			await UniTask.WaitUntil(() => _itemsGeneratorService.IsAllItemsReady);
 			
-			await UniTask.Delay(1500);
+			await UniTask.Delay(500);
 			
 			_loadingWindow.DOFade(0, LOADING_WINDOW_DURATION)
 				.OnComplete(() =>
@@ -68,10 +72,20 @@ namespace Scripts
 		{
 			foreach (var element in _generatedElements)
 			{
-				_itemSpawner.Spawn(element, Vector3.zero);
+				_itemSpawner.Spawn(element, GetRandomPointInside());
 				
-				await UniTask.Delay(400);
+				await UniTask.Delay(TimeSpan.FromSeconds(ELEMENT__SPAWN_DELAY));
 			}
+		}
+		
+		private Vector3 GetRandomPointInside()
+		{
+			var bounds = _spawnZoneCollider.bounds;
+
+			float x = Random.Range(bounds.min.x, bounds.max.x);
+			float y = Random.Range(bounds.min.y, bounds.max.y);
+
+			return new Vector3(x, y, 0f);
 		}
 	}
 }

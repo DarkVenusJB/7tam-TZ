@@ -6,6 +6,7 @@ namespace Scripts
     public class ScreenEdgeColliders : MonoBehaviour
     {
         [SerializeField] private BoxCollider2D _bottomEdge;
+        [SerializeField] private BoxCollider2D _topEdge;
         [SerializeField] private BoxCollider2D _leftEdge;
         [SerializeField] private BoxCollider2D _rightEdge;
         
@@ -25,13 +26,13 @@ namespace Scripts
 
             Vector3 camPos = _camera.transform.position;
             
+            _topEdge.transform.position = new Vector3(camPos.x, camPos.y + height / 2f + _topEdge.transform.localScale.y / 2f, 0);
+            
             _bottomEdge.transform.position = new Vector3(camPos.x, camPos.y - height / 2f - _bottomEdge.transform.localScale.y / 2f, 0);
             _leftEdge.transform.position = new Vector3(camPos.x - width / 2f - _leftEdge.transform.localScale.x / 2f, camPos.y, 0);
             _rightEdge.transform.position = new Vector3(camPos.x + width / 2f + _rightEdge.transform.localScale.x / 2f, camPos.y, 0);
-            
-            //_bottomEdge.size = new Vector2(width + _bottomEdge.transform.localScale.x * 2, _bottomEdge.transform.localScale.x);
-            //_leftEdge.size = new Vector2(_bottomEdge.transform.localScale.x, height + _bottomEdge.transform.localScale.x * 2);
-            //_rightEdge.size = new Vector2(_bottomEdge.transform.localScale.x, height + _bottomEdge.transform.localScale.x * 2);
+
+            _topEdge.transform.localScale = new Vector2(width- width*0.2f, _topEdge.transform.localScale.y);
         }
     }
 }
