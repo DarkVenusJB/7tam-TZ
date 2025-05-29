@@ -21,13 +21,14 @@ namespace Scripts.Services
         public List<GameItemData> GenerateItems(GeneratorData generatorData)
         {
             var totalCount = _random.Next(generatorData.MinMaxItemsCount.x, generatorData.MinMaxItemsCount.y);
-            
+
             _isAllItemsReady = false;
-            
+
+            // Гарантируем, что общее количество кратно 3
             if (totalCount % 3 != 0)
             {
-                Debug.LogWarning("Total count must be divisible by 3.");
                 totalCount -= totalCount % 3;
+                Debug.LogWarning($"Adjusted total count to be divisible by 3: {totalCount}");
             }
 
             var result = new List<GameItemData>(totalCount);
@@ -36,23 +37,44 @@ namespace Scripts.Services
             _animalTypes = Enum.GetValues(typeof(EAnimalType)).Cast<EAnimalType>().ToList();
             _colorTypes = Enum.GetValues(typeof(EColorType)).Cast<EColorType>().ToList();
 
-            while (result.Count < totalCount)
+            // Все возможные уникальные комбинации
+            var allCombinations = new List<GameItemData>();
+
+            foreach (var figure in _figureTypes)
+            foreach (var animal in _animalTypes)
+            foreach (var color in _colorTypes)
             {
-                var figure = _figureTypes[_random.Next(_figureTypes.Count)];
-                var animal = _animalTypes[_random.Next(_animalTypes.Count)];
-                var color = _colorTypes[_random.Next(_colorTypes.Count)];
-                var countToAdd = Math.Min(3 * _random.Next(1, 4), totalCount - result.Count);
+                allCombinations.Add(new GameItemData(figure, animal, color));
+            }
+
+            // Перемешиваем комбинации для разнообразия
+            Shuffle(allCombinations);
+
+            int combinationIndex = 0;
+
+            while (result.Count < totalCount && combinationIndex < allCombinations.Count)
+            {
+                var combo = allCombinations[combinationIndex++];
+                int maxPossible = (totalCount - result.Count) / 3;
+                int multiplier = _random.Next(1, Math.Min(4, maxPossible + 1)); // от 1 до 3 (т.е. 3, 6 или 9 штук)
+                int countToAdd = multiplier * 3;
 
                 for (int i = 0; i < countToAdd; i++)
                 {
-                    result.Add(new GameItemData(figure, animal, color));
+                    result.Add(new GameItemData(combo.FigureType, combo.AnimalType, combo.ColorType));
                 }
+            }
+
+            // Если мы не добрали, то дополняем из уже добавленных
+            while (result.Count < totalCount)
+            {
+                var existing = result[_random.Next(result.Count)];
+                result.Add(new GameItemData(existing.FigureType, existing.AnimalType, existing.ColorType));
             }
 
             Shuffle(result);
 
             _isAllItemsReady = true;
-            
             return result;
         }
 
